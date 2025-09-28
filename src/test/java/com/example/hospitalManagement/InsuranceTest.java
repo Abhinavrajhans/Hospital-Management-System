@@ -23,7 +23,7 @@ public class InsuranceTest {
                 .validUntil(LocalDate.now())
                 .build();
         Patient patient = insuranceService.assignInsuranceToPatient(insurance,1L);
-        System.out.println(patient);
+        System.out.println(patient );
 
     }
 }
