@@ -17,6 +17,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@ToString
 public class Doctor {
 
     @Id
@@ -41,6 +42,7 @@ public class Doctor {
     private Set<Department> departments=new HashSet<>();
 
     @OneToMany(mappedBy = "doctor")
+    @Builder.Default
     private List<Appointment> appointments=new ArrayList<>();
 
     @CreationTimestamp
