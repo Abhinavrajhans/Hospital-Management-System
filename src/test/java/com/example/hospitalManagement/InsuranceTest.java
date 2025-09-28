@@ -41,5 +41,8 @@ public class InsuranceTest {
                 .build();
         Appointment savedAppointment = appointmentService.createNewAppointment(appointment,1L,1L);
         System.out.println(savedAppointment);
+        Appointment updatedAppointment = appointmentService.reAssignAppointmentToAnotherDoctor(savedAppointment.getId(),3L);
+        System.out.println(updatedAppointment);
     }
+
 }

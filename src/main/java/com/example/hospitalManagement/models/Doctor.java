@@ -6,6 +6,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import jakarta.persistence.Id;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -38,6 +39,9 @@ public class Doctor {
     @ManyToMany(mappedBy="doctors")
     @Builder.Default
     private Set<Department> departments=new HashSet<>();
+
+    @OneToMany(mappedBy = "doctor")
+    private List<Appointment> appointments=new ArrayList<>();
 
     @CreationTimestamp
     @Column(nullable = false,updatable=false)

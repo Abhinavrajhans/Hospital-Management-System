@@ -19,7 +19,7 @@ public class AppointmentService {
     private final PatientRepository patientRepository;
 
     @Transactional
-    public Appointment createNewAppointment(Appointment appointment, long doctorId,long patientId )
+    public Appointment createNewAppointment(Appointment appointment, Long doctorId,Long patientId )
     {
         Doctor doctor = doctorRepository.findById(doctorId).orElseThrow();
         Patient patient = patientRepository.findById(patientId).orElseThrow();
@@ -31,6 +31,18 @@ public class AppointmentService {
         patient.getAppointments().add(appointment); // to maintain consistency
 
         return appointmentRepository.save(appointment);
+    }
+
+
+    @Transactional
+    public Appointment reAssignAppointmentToAnotherDoctor(Long appointmentId, Long doctorId)
+    {
+        Appointment savedAppointment = appointmentRepository.findById(appointmentId).orElseThrow();
+        Doctor doctor = doctorRepository.findById(doctorId).orElseThrow();
+
+        savedAppointment.setDoctor(doctor); // this will automatically call the update , because it is dirty
+        doctor.getAppointments().add(savedAppointment); // just for directional consistency
+        return savedAppointment;
     }
 
 }
