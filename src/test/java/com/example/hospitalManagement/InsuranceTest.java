@@ -39,7 +39,7 @@ public class InsuranceTest {
                 .appointmentTime(LocalDateTime.now())
                 .reason("Headache")
                 .build();
-        Appointment savedAppointment = appointmentService.createNewAppointment(appointment,1L,2L);
+        Appointment savedAppointment = appointmentService.createNewAppointment(appointment,1L,1L);
         System.out.println(savedAppointment);
     }
 }
