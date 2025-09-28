@@ -13,16 +13,16 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class InsuranceService {
 
-    private InsuranceRepository insuranceRepository;
-    private PatientRepository patientRepository;
+    private final InsuranceRepository insuranceRepository;
+    private final PatientRepository patientRepository;
 
     @Transactional
     public Patient assignInsuranceToPatient(Insurance insurance, Long patientId){
-            Patient patient = patientRepository.findById(patientId).orElseThrow(()->
-                    new EntityNotFoundException("Patient with id: "+patientId+" not found"));
+        Patient patient = patientRepository.findById(patientId).orElseThrow(() ->
+                new EntityNotFoundException("Patient with id: " + patientId + " not found"));
 
-            patient.setInsurance(insurance);
-            insurance.setPatient(patient); // bidirectional consistency maintainance.
-            return patientRepository.save(patient);
+        patient.setInsurance(insurance);
+        insurance.setPatient(patient); // maintain bidirectional consistency
+        return patientRepository.save(patient);
     }
 }

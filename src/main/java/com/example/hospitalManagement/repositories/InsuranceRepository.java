@@ -1,4 +1,7 @@
 package com.example.hospitalManagement.repositories;
 
-public interface InsuranceRepository {
+import com.example.hospitalManagement.models.Insurance;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface InsuranceRepository extends JpaRepository<Insurance,Long> {
 }
