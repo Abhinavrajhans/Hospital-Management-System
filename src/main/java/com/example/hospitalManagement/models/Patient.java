@@ -47,7 +47,7 @@ public class Patient {
     private Insurance insurance;
 
 
-    @OneToMany(mappedBy = "patient" )
+    @OneToMany(mappedBy = "patient" , cascade = {CascadeType.REMOVE} , orphanRemoval = true )
     @ToString.Exclude
     @Builder.Default
     private List<Appointment> appointments = new ArrayList<>();
