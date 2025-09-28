@@ -1,0 +1,48 @@
+package com.example.hospitalManagement.models;
+
+import com.example.hospitalManagement.models.type.BloodGroupType;
+import jakarta.persistence.*;
+import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+
+import java.time.LocalDateTime;
+import java.util.List;
+
+@Entity
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class Patient {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+
+    @Column(nullable = false,length = 50)
+    private String name;
+
+
+    private LocalDateTime birthDate;
+
+    @Column(unique = true, nullable =false)
+    private String email;
+
+    private String gender;
+
+    @CreationTimestamp
+    @Column(updatable=false)
+    private LocalDateTime createdAt;
+
+    @Enumerated(EnumType.STRING)
+    private BloodGroupType bloodGroup;
+
+    @OneToOne
+    @JoinColumn(name="patient_insurance_id") //owing side
+    private Insurance insurance;
+
+
+    @OneToMany(mappedBy = "patient")
+    private List<Appointment> appointments;
+}

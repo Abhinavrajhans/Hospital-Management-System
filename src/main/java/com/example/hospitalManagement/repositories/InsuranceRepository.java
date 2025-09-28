@@ -1,0 +1,4 @@
+package com.example.hospitalManagement.repositories;
+
+public interface InsuranceRepository {
+}
